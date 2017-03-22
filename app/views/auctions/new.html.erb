@@ -1,0 +1,13 @@
+<h1>Create a new auction</h1>
+
+<%= form_for @auction, url: '/auctions' do |f| %>
+  Title: <%= f.text_field :name %>
+  Starts at: <%= f.text_field :starts_at %>
+  Ends at: <%= f.text_field :ends_at %>
+  Time zone: <%= f.text_field :time_zone_id %>
+  Address: <%= f.text_field :physical_address %>
+  Ends window bids: <%= f.text_field :donation_window_ends_at %>
+  <%= f.submit "Submit" %>
+
+<% end %>
+

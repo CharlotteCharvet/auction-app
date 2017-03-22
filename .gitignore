@@ -15,3 +15,8 @@
 
 # Ignore Byebug command history file.
 .byebug_history
+
+
+spec/exemples.txt 
+# Ignore application configuration
+/config/application.yml
