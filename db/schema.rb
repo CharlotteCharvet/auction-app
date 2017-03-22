@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170320132308) do
+ActiveRecord::Schema.define(version: 20170321155451) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "auction_admins", force: :cascade do |t|
+    t.integer  "user_id",    null: false
+    t.integer  "auction_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["auction_id"], name: "index_auction_admins_on_auction_id", using: :btree
+    t.index ["user_id"], name: "index_auction_admins_on_user_id", using: :btree
+  end
 
   create_table "auctions", force: :cascade do |t|
     t.datetime "starts_at"
@@ -26,6 +35,36 @@ ActiveRecord::Schema.define(version: 20170320132308) do
     t.datetime "updated_at",              null: false
   end
 
+  create_table "authentications", force: :cascade do |t|
+    t.string   "uid"
+    t.string   "token"
+    t.string   "provider"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_authentications_on_user_id", using: :btree
+  end
+
+  create_table "bids", force: :cascade do |t|
+    t.integer  "amount_dollars"
+    t.datetime "place_at"
+    t.integer  "user_id"
+    t.integer  "item_id",        null: false
+    t.integer  "auction_id",     null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["user_id"], name: "index_bids_on_user_id", using: :btree
+  end
+
+  create_table "items", force: :cascade do |t|
+    t.json     "photo"
+    t.string   "title"
+    t.integer  "estimation"
+    t.integer  "auction_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "name"
     t.string   "mobile_phone_number"
@@ -33,8 +72,15 @@ ActiveRecord::Schema.define(version: 20170320132308) do
     t.string   "physical_address"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
+    t.string   "password_digest"
+    t.string   "provider"
+    t.string   "uid"
     t.index ["email_address"], name: "index_users_on_email_address", unique: true, using: :btree
     t.index ["mobile_phone_number"], name: "index_users_on_mobile_phone_number", unique: true, using: :btree
   end
 
+  add_foreign_key "auction_admins", "auctions"
+  add_foreign_key "auction_admins", "users"
+  add_foreign_key "authentications", "users"
+  add_foreign_key "bids", "users"
 end

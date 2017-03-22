@@ -18,5 +18,5 @@ RSpec.describe User do
     expect(duplicate.errors[:email_address]).to include "has already been taken"
   end
 
-
+   it {is_expected.to have_many :auction_admins}
 end

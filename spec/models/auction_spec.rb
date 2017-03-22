@@ -10,6 +10,11 @@ describe "attributes" do
   it {is_expected.to have_attribute :donation_window_ends_at}
 end
 
+describe "relationship" do
+  it {is_expected.to have_many :auction_admins}
+
+end
+
 describe "validations" do
   it "ends_at is after starts_at" do
     subject.ends_at = DateTime.new(2017,03,20,0,0)
@@ -29,6 +34,10 @@ describe "validations" do
     subject.time_zone_id = "MarsTime"
     subject.valid?
     expect(subject.errors[:time_zone_id]).to include "is not included in the list"
+  end
+
+  it "has a valid factory" do
+    expect(FactoryGirl.create(:auction)).to be_persisted
   end
 end
 end
