@@ -1,0 +1,34 @@
+<% @items_display.each do |l| %>
+
+    <div class="record" data-id="<%= l.id %>"  >
+      <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
+   
+      
+        <div class="thumbnail ">
+
+          <% if l.photos.present? %>
+            <% l.photos.each do |photo| %>
+              <p><%= image_tag photo, class: "img-responsive" %></p>
+            <% end %>
+          <% else %>   
+              <img src="test_airbnb.png" alt="...">  
+          <% end %>
+           
+          <div class="caption">
+            <% bid_display = @bids.where(item_id:l.id) %>
+            <h6><%= bid_display.count %> bids have been made</h6>
+        
+          <h3>Name : <%= l.title %></h3>
+          <h4>Estimation : <%= l.estimation %> $</h4>
+
+
+          <p><%= link_to "make a bid", new_item_bid_path(l.id) %> |  
+          <%= link_to "edit", edit_auction_item_path(params[:auction_id], l.id) %></p>
+          
+          </div>
+
+        </div>
+      
+       </div>
+    </div>
+    <% end %>

@@ -1,0 +1,29 @@
+
+
+
+<% @auctions.each do |auction| %>
+
+<div class="container">
+  <h2>Basic Table</h2>            
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Auction's name :</th>
+        <th>Auction's start :</th>
+        <th>Auction's end :</th>
+        <th>bid's end at :</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= auction.name %></td>
+        <td><%= auction.starts_at %></td>
+        <td><%= auction.ends_at %></td>
+        <td><%= auction.donation_window_ends_at %></td>
+        <td><%= link_to "see items", auction_items_path(auction.id) %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<% end %>

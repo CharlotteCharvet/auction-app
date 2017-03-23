@@ -1,1 +1,20 @@
-new.html.erb
+<h1>Create a new item</h1>
+
+<%= form_for @item, url: auction_items_path do |f| %>
+<div>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+</div>
+<div>
+  <%= f.label :estimation %>
+  <%= f.number_field :estimation %>
+</div>
+<div>
+    <%= f.label :photos %>
+    <%= f.file_field :photos, multiple: true %>
+</div>
+
+
+  <%= f.submit "Submit" %>
+
+<% end %>

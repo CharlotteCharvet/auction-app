@@ -1,0 +1,73 @@
+<% flash.each do |key, value| %>
+      <div class="<%= flash_class(key.to_sym) %>">
+            <%= value %>
+      </div>
+<% end %>
+
+
+<div class="container conteneur">
+ <h1><%= @auction.name %> | <span><%= link_to "edit", edit_auction_path(params[:auction_id]) %></span></h1> 
+ <h3>starts from <%= @auction.starts_at %> to <%= @auction.ends_at %></h3>
+ <p>Last time to make your bid :<%= @auction.donation_window_ends_at %>
+
+ <div  class="container">
+<%= form_tag auction_items_path(@auction.id), method: :get, class: 'form-group' do %>
+  <%= text_field_tag :query, params[:query], class: 'form-control search-bar' %>
+  <%= submit_tag "GO", name: nil, class: 'btn btn-default submit-button' %>
+<% end %>
+
+</div>
+<%= render partial: "item", item: @items_display  %>
+
+
+
+</div>
+
+<div class="load-more-container">
+        <!-- hide our loading gif image so that we show it when making ajax call via jquery -->
+  <%= image_tag "ajax-loader.gif", style: "display:none;", class: "loading-gif" %>
+  <%= link_to "Load More", auction_items_path(@auction.id), class: "load-more" %>
+</div>
+});
+<script>
+// when the page is ready for manipulation
+$(document).ready(function(){
+  // when the load more link is clicked
+  $('a.load-more').click(function(e){
+
+    // prevent the default click action
+    e.preventDefault();
+
+        // hide load more link
+        $('.load-more').hide();
+
+        // show loading gif
+        $('.loading-gif').show();
+
+    // get the last id and save it in a variable 'last-id'
+        var last_id = $('.record').last().attr('data-id');
+
+        // make an ajax call passing along our last user id
+        $.ajax({
+
+          // make a get request to the server
+            type: "GET",
+            // get the url from the href attribute of our link
+            url: $(this).attr('href'),
+            // send the last id to our rails app
+            data: { last_id: last_id },
+            // the response will be a script
+            dataType: "script",
+
+            // upon success 
+            success: function(){
+                // hide the loading gif
+                $('.loading-gif').hide();
+                // show our load more link
+                $('.load-more').show();
+            }
+        });
+
+  });
+});
+</script>

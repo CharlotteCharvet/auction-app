@@ -1,0 +1,20 @@
+<h1>Update item</h1>
+
+<%= form_for @item, url: auction_items_path do |f| %>
+<div>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+</div>
+<div>
+  <%= f.label :estimation %>
+  <%= f.number_field :estimation %>
+</div>
+<div>
+  <%= f.label :photo %>
+  <%= f.file_field :photo, multiple: true %>
+</div>
+
+
+  <%= f.submit "Submit" %>
+
+<% end %>

@@ -1,13 +1,24 @@
 
 <h1>Signup!</h1>
 
-<%= form_for @user, url: '/users' do |f| %>
+ <%= form_for(@user, remote: true) do |form| %>
+    <div id="error_explanation">
+      <% if @user.errors.any? %>
+          <h2>
+            <%= pluralize(@user.errors.count, "error") %> found.
+          </h2>
+          <ul>
+            <% @user.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+      <% end %>
+    </div>
 
-  Name: <%= f.text_field :name %>
-  Email: <%= f.text_field :email_address %>
-  Password: <%= f.password_field :password %>
-  <%= f.submit "Submit" %>
+    <%= render partial: '/users/form', object: form %>
+  <%= form.submit "Submit" %>
 
 <% end %>
 
 <%= link_to "Sign in with Facebook", "/auth/facebook" %>
+

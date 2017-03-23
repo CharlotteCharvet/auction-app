@@ -3,12 +3,13 @@ class AuctionsController < ApplicationController
   def index
     @auctions = Auction.all
   end
+  
   def new
     @auction = Auction.new
   end
 
-  def new
-    @auction = Auction.find_by(id: params[:auction_id])
+  def show
+    @auction = Auction.find_by(params[:auction_id])
   end
 
   def create

@@ -1,3 +1,12 @@
+GIT
+  remote: https://github.com/carrierwaveuploader/carrierwave.git
+  revision: 75e95b54ddbb3022cc7f9dd083a273dcd79be564
+  specs:
+    carrierwave (1.0.0)
+      activemodel (>= 4.0.0)
+      activesupport (>= 4.0.0)
+      mime-types (>= 1.16)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -39,7 +48,14 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
     arel (7.1.4)
+    autoprefixer-rails (6.7.7)
+      execjs
     bcrypt (3.1.11)
+    bootstrap-sass (3.3.7)
+      autoprefixer-rails (>= 5.2.1)
+      sass (>= 3.3.4)
+    braintree (2.72.0)
+      builder (>= 2.0.0)
     builder (3.2.3)
     byebug (9.0.6)
     coffee-rails (4.2.1)
@@ -110,6 +126,10 @@ GEM
       oauth2 (~> 1.0)
       omniauth (~> 1.2)
     pg (0.20.0)
+    pg_search (2.0.1)
+      activerecord (>= 4.2)
+      activesupport (>= 4.2)
+      arel (>= 6)
     puma (3.8.2)
     rack (2.0.1)
     rack-test (0.6.3)
@@ -205,7 +225,10 @@ PLATFORMS
 
 DEPENDENCIES
   bcrypt (~> 3.1.7)
+  bootstrap-sass (~> 3.3, >= 3.3.7)
+  braintree
   byebug
+  carrierwave!
   coffee-rails (~> 4.2)
   factory_girl_rails
   figaro
@@ -215,6 +238,7 @@ DEPENDENCIES
   omniauth
   omniauth-facebook
   pg (~> 0.18)
+  pg_search
   puma (~> 3.0)
   rails (~> 5.0.1)
   rspec-rails (~> 3.5)

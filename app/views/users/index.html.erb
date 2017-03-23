@@ -1,11 +1,91 @@
 <h1>Hello, <%= current_user.name %></h1>
 
-<p>bouton pour créer des ventes si user = admin</p>
-<%= button_to "Create an auction", new_auction_path %>
+
+<% flash.each do |key, value| %>
+      <div class="<%= flash_class(key.to_sym) %>">
+            <%= value %>
+      </div>
+<% end %>
+
+<div class="container">
+  <h2>My winning bids :</h2>            
+  <table class="table">
+  
+    <thead>
+      <tr>
+        <th>Auction's name :</th>
+        <th>item's name :</th>
+        <th>item's estimation :</th>
+        <th>bid's amount :</th>
+        <th>bid placed at :</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @finalist.each do |final| %>
+      <tr>
+        <td><% a = final.auction_id %>
+            <% b = @auction.find_by(id:a) %>
+            <%= b.name %></td>
+        <td><% e = final.item_id %>
+            <% f = @items.find_by(id:e) %>
+            <%= f.title %></td>
+         <td><% c = final.item_id %>
+            <% d = @items.find_by(id:c) %>
+            <%= d.estimation %> $</td>    
+        <td><%= final.amount_dollars %> $</td>
+        <td><%= final.place_at %></td>
+         <td><%= link_to "Best bid, proceed to payment", braintree_new_path({bid_id: final.id}) %></td>
+      <% end %>           
+       
+          
+      </tr>
+    </tbody>
+  </table>
 
 
-<p>bouton pour voir les ventes</p>
+  <h2>The bids I made:</h2>            
+  <table class="table">
+  
+    <thead>
+      <tr>
+        <th>Auction's name :</th>
+        <th>item's name :</th>
+        <th>item's estimation :</th>
+        <th>bid's amount :</th>
+        <th>bid placed at :</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @bids.each do |final| %>
+      <tr>
+        <td><% a = final.auction_id %>
+            <% b = @auction.find_by(id:a) %>
+            <%= b.name %></td>
+        <td><% e = final.item_id %>
+            <% f = @items.find_by(id:e) %>
+            <%= f.title %></td>
+         <td><% c = final.item_id %>
+            <% d = @items.find_by(id:c) %>
+            <%= d.estimation %> $</td>    
+        <td><%= final.amount_dollars %> $</td>
+        <td><%= final.place_at %></td>
+      <% end %>           
+       
+          
+      </tr>
+    </tbody>
+  </table>
+</div>
 
-<p>bouton pour voir les bid effectués</p>
+
+
+
+
+
+<p><%= link_to "Create an auction",  new_user_auction_path(current_user.id) %></p>
+
+
+<p><%= link_to "See all the auctions", user_auctions_path(current_user.id) %></p>
+
 
 

@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>AuctionApp</title>
+
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -15,6 +16,7 @@
   <% else %>
     <%= link_to 'Login', '/login' %> | <%= link_to 'Signup', '/signup' %>
   <% end %>
+
 
     <%= yield %>
   </body>

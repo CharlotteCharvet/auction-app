@@ -1,0 +1,15 @@
+<div class="container">
+<h1>item</h1>
+
+<%= form_for @bid, url: item_bids_path(@item.id) do |f| %>
+<div>
+  <%= f.label :amount_dollars %>
+  <%= f.number_field :amount_dollars %>
+</div>
+
+
+
+
+  <%= f.submit "Submit" %>
+
+<% end %>
